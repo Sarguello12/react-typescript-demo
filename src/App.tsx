@@ -1,18 +1,25 @@
+
+import { useState } from 'react';
+import NewTodo from './components/NewTodo';
 import Todos from './components/Todos';
 import Todo from './models/todo';
 
 function App() {
+  const [todos, setTodos] = useState<Todo[]>([]);
 
-  const tasks = [
-    new Todo("Learn React"),
-    new Todo("Learn TypeScrips")
-  ]
+  const addTodoHandler = (text: string) => {
+    const newTodo = new Todo(text);
+    setTodos((prevTodos) => { return prevTodos.concat(newTodo)});
+  }
 
   return (
     <div>
-      <Todos items={tasks}/>
+      <NewTodo onAddTodo={addTodoHandler}/>
+      <Todos items={todos}/>
     </div>
   );
 }
 
 export default App;
+
+//   const [todos, setTodos] = useState<Todo[]>([]) : we can also declare the type within a useState hook
