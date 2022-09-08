@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import NewTodo from './components/NewTodo';
 import Todos from './components/Todos';
 import Todo from './models/todo';
@@ -12,10 +12,14 @@ function App() {
     setTodos((prevTodos) => { return prevTodos.concat(newTodo)});
   }
 
+  const removeClickHandler = (id: string) => {
+    setTodos((prevTodos) => { return prevTodos.filter((todo) => todo.id !== id ) });
+  }
+
   return (
     <div>
       <NewTodo onAddTodo={addTodoHandler}/>
-      <Todos items={todos}/>
+      <Todos items={todos} onRemoveTodo={removeClickHandler}/>
     </div>
   );
 }
